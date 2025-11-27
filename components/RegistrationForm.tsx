@@ -126,11 +126,10 @@ export default function RegistrationForm({ eventName }: RegistrationFormProps) {
 
       {message && (
         <div
-          className={`mb-4 p-4 rounded ${
-            message.type === "success"
+          className={`mb-4 p-4 rounded ${message.type === "success"
               ? "bg-green-100 text-green-800"
               : "bg-red-100 text-red-800"
-          }`}
+            }`}
         >
           {message.text}
         </div>
@@ -190,7 +189,7 @@ export default function RegistrationForm({ eventName }: RegistrationFormProps) {
                 onChange={(e) => setTeamName(e.target.value)}
                 required={participationType === "team"}
                 placeholder="Enter your team name"
-                className="w-full px-3 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-purple-500 focus:border-transparent bg-white text-gray-900 placeholder-gray-400"
+                className="w-full px-3 py-2 border border-gray-400 rounded-md focus:ring-2 focus:ring-purple-500 focus:border-transparent bg-white text-black placeholder-gray-500"
               />
             </div>
           </div>
@@ -214,7 +213,7 @@ export default function RegistrationForm({ eventName }: RegistrationFormProps) {
                 value={leaderName}
                 onChange={(e) => setLeaderName(e.target.value)}
                 required
-                className="w-full px-3 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500 focus:border-transparent bg-white text-gray-900 placeholder-gray-400"
+                className="w-full px-3 py-2 border border-gray-400 rounded-md focus:ring-2 focus:ring-blue-500 focus:border-transparent bg-white text-black placeholder-gray-500"
               />
             </div>
 
@@ -226,7 +225,7 @@ export default function RegistrationForm({ eventName }: RegistrationFormProps) {
                 value={leaderGender}
                 onChange={(e) => setLeaderGender(e.target.value)}
                 required
-                className="w-full px-3 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500 focus:border-transparent bg-white text-gray-900"
+                className="w-full px-3 py-2 border border-gray-400 rounded-md focus:ring-2 focus:ring-blue-500 focus:border-transparent bg-white text-black"
               >
                 <option value="">Select Gender</option>
                 <option value="Male">Male</option>
@@ -244,7 +243,7 @@ export default function RegistrationForm({ eventName }: RegistrationFormProps) {
                 value={leaderRollNumber}
                 onChange={(e) => setLeaderRollNumber(e.target.value)}
                 required
-                className="w-full px-3 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500 focus:border-transparent bg-white text-gray-900 placeholder-gray-400"
+                className="w-full px-3 py-2 border border-gray-400 rounded-md focus:ring-2 focus:ring-blue-500 focus:border-transparent bg-white text-black placeholder-gray-500"
               />
             </div>
 
@@ -259,7 +258,7 @@ export default function RegistrationForm({ eventName }: RegistrationFormProps) {
                 onChange={(e) => setLeaderContactNumber(e.target.value)}
                 required
                 placeholder="10-digit number"
-                className="w-full px-3 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500 focus:border-transparent bg-white text-gray-900 placeholder-gray-400"
+                className="w-full px-3 py-2 border border-gray-400 rounded-md focus:ring-2 focus:ring-blue-500 focus:border-transparent bg-white text-black placeholder-gray-500"
               />
             </div>
 
@@ -272,7 +271,7 @@ export default function RegistrationForm({ eventName }: RegistrationFormProps) {
                 value={leaderEmail}
                 onChange={(e) => setLeaderEmail(e.target.value)}
                 required
-                className="w-full px-3 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500 focus:border-transparent bg-white text-gray-900 placeholder-gray-400"
+                className="w-full px-3 py-2 border border-gray-400 rounded-md focus:ring-2 focus:ring-blue-500 focus:border-transparent bg-white text-black placeholder-gray-500"
               />
             </div>
           </div>
@@ -331,7 +330,7 @@ export default function RegistrationForm({ eventName }: RegistrationFormProps) {
                         updateTeamMember(index, "name", e.target.value)
                       }
                       required
-                      className="w-full px-3 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500 focus:border-transparent bg-white text-gray-900 placeholder-gray-400"
+                      className="w-full px-3 py-2 border border-gray-400 rounded-md focus:ring-2 focus:ring-blue-500 focus:border-transparent bg-white text-black placeholder-gray-500"
                     />
                   </div>
 
@@ -345,7 +344,7 @@ export default function RegistrationForm({ eventName }: RegistrationFormProps) {
                         updateTeamMember(index, "gender", e.target.value)
                       }
                       required
-                      className="w-full px-3 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500 focus:border-transparent bg-white text-gray-900"
+                      className="w-full px-3 py-2 border border-gray-400 rounded-md focus:ring-2 focus:ring-blue-500 focus:border-transparent bg-white text-black"
                     >
                       <option value="">Select Gender</option>
                       <option value="Male">Male</option>
@@ -365,7 +364,7 @@ export default function RegistrationForm({ eventName }: RegistrationFormProps) {
                         updateTeamMember(index, "rollNumber", e.target.value)
                       }
                       required
-                      className="w-full px-3 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500 focus:border-transparent bg-white text-gray-900 placeholder-gray-400"
+                      className="w-full px-3 py-2 border border-gray-400 rounded-md focus:ring-2 focus:ring-blue-500 focus:border-transparent bg-white text-black placeholder-gray-500"
                     />
                   </div>
 
@@ -382,7 +381,7 @@ export default function RegistrationForm({ eventName }: RegistrationFormProps) {
                       }
                       required
                       placeholder="10-digit number"
-                      className="w-full px-3 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500 focus:border-transparent bg-white text-gray-900 placeholder-gray-400"
+                      className="w-full px-3 py-2 border border-gray-400 rounded-md focus:ring-2 focus:ring-blue-500 focus:border-transparent bg-white text-black placeholder-gray-500"
                     />
                   </div>
 
@@ -397,7 +396,7 @@ export default function RegistrationForm({ eventName }: RegistrationFormProps) {
                         updateTeamMember(index, "email", e.target.value)
                       }
                       required
-                      className="w-full px-3 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500 focus:border-transparent bg-white text-gray-900 placeholder-gray-400"
+                      className="w-full px-3 py-2 border border-gray-400 rounded-md focus:ring-2 focus:ring-blue-500 focus:border-transparent bg-white text-black placeholder-gray-500"
                     />
                   </div>
                 </div>
