@@ -1,121 +1,54 @@
 import Link from "next/link";
+import Image from "next/image";
 
 export default function Home() {
-  const events = [
-    {
-      name: "Hackathon 2025",
-      slug: "hackathon-2025",
-      description: "Code, Build, and Win! 48-hour coding marathon",
-      date: "January 15-17, 2025",
-    },
-    {
-      name: "Startup Pitch Competition",
-      slug: "startup-pitch-2025",
-      description: "Present your innovative startup idea to investors",
-      date: "February 5, 2025",
-    },
-    {
-      name: "Innovation Workshop",
-      slug: "innovation-workshop",
-      description: "Learn about latest tech trends and innovations",
-      date: "March 10, 2025",
-    },
-    {
-      name: "Tech Talk Series",
-      slug: "tech-talk-2025",
-      description: "Industry experts share their insights and experiences",
-      date: "Monthly",
-    },
-  ];
-
   return (
-    <div className="min-h-screen bg-gradient-to-br from-blue-50 via-indigo-50 to-purple-50">
-      {/* Header */}
-      <header className="bg-white shadow-sm">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6">
-          <h1 className="text-3xl font-bold text-gray-900">
-            Innovation & Incubation Startup Foundation
-          </h1>
-          <p className="mt-2 text-gray-600">Your College Innovation Hub</p>
-        </div>
-      </header>
-
-      {/* Main Content */}
-      <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
-        {/* Hero Section */}
-        <div className="text-center mb-16">
-          <h2 className="text-4xl font-extrabold text-gray-900 sm:text-5xl mb-4">
-            Welcome to IISF
-          </h2>
-          <p className="text-xl text-gray-600 max-w-3xl mx-auto">
-            Join our community of innovators, entrepreneurs, and tech
-            enthusiasts. Register for exciting events and competitions!
-          </p>
+    <div className="min-h-screen bg-gray-50 flex flex-col items-center justify-center p-4">
+      <div className="text-center max-w-4xl">
+        {/* Logo */}
+        <div className="relative w-32 h-32 mx-auto mb-8">
+          <Image
+            src="/iisf-logo-new.jpg"
+            alt="IISF Logo"
+            fill
+            className="object-contain"
+            priority
+          />
         </div>
 
-        {/* Events Section */}
-        <div className="mb-12">
-          <h3 className="text-3xl font-bold text-gray-900 mb-8 text-center">
-            Upcoming Events
-          </h3>
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-            {events.map((event) => (
-              <div
-                key={event.slug}
-                className="bg-white rounded-lg shadow-md hover:shadow-xl transition-shadow p-6 border border-gray-200"
-              >
-                <h4 className="text-2xl font-bold text-gray-900 mb-2">
-                  {event.name}
-                </h4>
-                <p className="text-gray-600 mb-2">{event.description}</p>
-                <p className="text-sm text-indigo-600 font-semibold mb-4">
-                  📅 {event.date}
-                </p>
-                <Link
-                  href={`/register/${event.slug}`}
-                  className="inline-block w-full text-center px-6 py-3 bg-blue-600 text-white font-semibold rounded-lg hover:bg-blue-700 transition"
-                >
-                  Register Now
-                </Link>
-              </div>
-            ))}
-          </div>
+        <h1 className="text-3xl md:text-5xl font-extrabold text-[#1E293B] mb-6 tracking-tight leading-tight">
+          <span className="text-[#1A4DB3]">Innovation Incubation</span> and <span className="text-[#F5A623]">Startup Foundation</span>
+        </h1>
+
+        <div className="bg-white p-8 rounded-2xl shadow-xl border border-gray-100 mb-10 transform hover:scale-105 transition-transform duration-300">
+          <span className="block text-5xl md:text-7xl font-black tracking-widest mb-2">
+            <span className="text-[#1A4DB3]">COMING</span>
+          </span>
+          <span className="block text-5xl md:text-7xl font-black tracking-widest text-[#F5A623]">
+            SOON
+          </span>
         </div>
 
-        {/* Features Section */}
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mt-16">
-          <div className="text-center p-6 bg-white rounded-lg shadow-md">
-            <div className="text-4xl mb-4">🚀</div>
-            <h3 className="text-xl font-bold text-gray-900 mb-2">Innovation</h3>
-            <p className="text-gray-600">
-              Foster creativity and develop groundbreaking solutions
-            </p>
-          </div>
-          <div className="text-center p-6 bg-white rounded-lg shadow-md">
-            <div className="text-4xl mb-4">💡</div>
-            <h3 className="text-xl font-bold text-gray-900 mb-2">Incubation</h3>
-            <p className="text-gray-600">
-              Transform ideas into successful startups with mentorship
-            </p>
-          </div>
-          <div className="text-center p-6 bg-white rounded-lg shadow-md">
-            <div className="text-4xl mb-4">🤝</div>
-            <h3 className="text-xl font-bold text-gray-900 mb-2">Community</h3>
-            <p className="text-gray-600">
-              Connect with like-minded innovators and entrepreneurs
-            </p>
-          </div>
-        </div>
-      </main>
+        <p className="text-xl text-gray-600 mb-12 max-w-lg mx-auto leading-relaxed">
+          We are building something extraordinary. The Innovation Incubation and Startup Foundation's new digital experience is on its way.
+        </p>
 
-      {/* Footer */}
-      <footer className="bg-white mt-16 py-8 border-t">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center text-gray-600">
-          <p>
-            © 2025 Innovation & Incubation Startup Foundation. All rights
-            reserved.
-          </p>
+        {/* Tussle 3.0 Link - Kept accessible as requested implicitly by keeping the form active */}
+        <div className="animate-bounce">
+          <Link
+            href="/forms/tussle3"
+            className="inline-flex items-center px-8 py-4 bg-[#1A4DB3] text-white font-bold rounded-full hover:bg-[#F5A623] transition-all duration-300 shadow-lg hover:shadow-xl transform hover:-translate-y-1"
+          >
+            Register for Tussle 3.0
+            <svg className="w-5 h-5 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M17 8l4 4m0 0l-4 4m4-4H3" />
+            </svg>
+          </Link>
         </div>
+      </div>
+
+      <footer className="absolute bottom-8 text-gray-400 text-sm">
+        &copy; 2025 IISF. All rights reserved.
       </footer>
     </div>
   );
