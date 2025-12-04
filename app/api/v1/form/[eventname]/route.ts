@@ -1,6 +1,7 @@
 import { NextRequest, NextResponse } from "next/server";
 import dbConnect from "@/lib/mongodb";
 import Registration from "@/models/Registration";
+import Participant from "@/models/Participant";
 
 export async function POST(
   request: NextRequest,
@@ -8,8 +9,8 @@ export async function POST(
 ) {
   try {
     console.log("📝 Registration API called");
-    
-    // Connect to database
+
+    // Connect to database FIRST
     await dbConnect();
     console.log("✅ Database connected");
 
@@ -53,13 +54,20 @@ export async function POST(
       !leaderEmail
     ) {
       return NextResponse.json(
-        { success: false, error: "All leader fields are required." },
+        {
+          success: false,
+          error: "All leader/participant fields are required.",
+        },
         { status: 400 }
       );
     }
 
-    // Validate team members for team participation
-    if (participationType === "team") {
+    // Determine isTeam and total participants
+    const isTeam = participationType === "team";
+    const totalParticipants = isTeam ? teamMembers.length + 1 : 1;
+
+    // Validate team-specific requirements
+    if (isTeam) {
       // Validate team name is provided
       if (!teamName || teamName.trim() === "") {
         return NextResponse.json(
@@ -87,7 +95,8 @@ export async function POST(
       }
 
       // Validate each team member has required fields
-      for (const member of teamMembers) {
+      for (let i = 0; i < teamMembers.length; i++) {
+        const member = teamMembers[i];
         if (
           !member.name ||
           !member.gender ||
@@ -98,7 +107,7 @@ export async function POST(
           return NextResponse.json(
             {
               success: false,
-              error: "All fields are required for each team member.",
+              error: `All fields are required for team member ${i + 1}.`,
             },
             { status: 400 }
           );
@@ -110,39 +119,71 @@ export async function POST(
         return NextResponse.json(
           {
             success: false,
-            error: "Solo participation cannot have team members.",
+            error: "Individual participation cannot have team members.",
           },
           { status: 400 }
         );
       }
     }
 
-    // Create registration
+    // Create registration document
     console.log("💾 Creating registration...");
     const registration = await Registration.create({
       eventName,
-      participationType,
-      teamName: participationType === "team" ? teamName : undefined,
-      leaderName,
-      leaderGender,
-      leaderRollNumber,
-      leaderContactNumber,
+      isTeam,
+      teamName: isTeam ? teamName : undefined,
       leaderEmail,
-      teamMembers: participationType === "team" ? teamMembers : [],
+      totalParticipants,
     });
     console.log("✅ Registration created:", registration._id);
+
+    const registrationId = registration._id;
+
+    // Create participant documents
+    const participants = [];
+
+    // Add leader as participant
+    participants.push({
+      registrationId,
+      name: leaderName,
+      gender: leaderGender,
+      rollNumber: leaderRollNumber,
+      contactNumber: leaderContactNumber,
+      email: leaderEmail,
+      isLeader: true,
+    });
+
+    // Add team members as participants (if team)
+    if (isTeam) {
+      for (const member of teamMembers) {
+        participants.push({
+          registrationId,
+          name: member.name,
+          gender: member.gender,
+          rollNumber: member.rollNumber,
+          contactNumber: member.contactNumber,
+          email: member.email,
+          isLeader: false,
+        });
+      }
+    }
+
+    console.log("💾 Creating participants...");
+    const createdParticipants = await Participant.insertMany(participants);
+    console.log(`✅ ${createdParticipants.length} participants created`);
 
     return NextResponse.json(
       {
         success: true,
         message: "Registration successful!",
         data: {
-          id: registration._id,
+          registrationId: registration._id,
           eventName: registration.eventName,
-          participationType: registration.participationType,
+          isTeam: registration.isTeam,
           teamName: registration.teamName,
-          leaderName: registration.leaderName,
-          teamSize: participationType === "team" ? teamMembers.length + 1 : 1,
+          leaderName,
+          totalParticipants: registration.totalParticipants,
+          participantsCreated: createdParticipants.length,
         },
       },
       { status: 201 }
@@ -155,10 +196,29 @@ export async function POST(
 
     // Handle duplicate registration
     if (error.code === 11000) {
+      const duplicateField = error.keyPattern;
+      if (duplicateField?.leaderEmail && duplicateField?.eventName) {
+        return NextResponse.json(
+          {
+            success: false,
+            error: "You have already registered for this event.",
+          },
+          { status: 409 }
+        );
+      }
+      if (duplicateField?.registrationId && duplicateField?.email) {
+        return NextResponse.json(
+          {
+            success: false,
+            error: "Duplicate participant email found in the registration.",
+          },
+          { status: 409 }
+        );
+      }
       return NextResponse.json(
         {
           success: false,
-          error: "You have already registered for this event.",
+          error: "Duplicate entry detected.",
         },
         { status: 409 }
       );
@@ -184,14 +244,14 @@ export async function POST(
         success: false,
         error: "An error occurred during registration. Please try again.",
         details: error.message,
-        hint: "Make sure MongoDB is running on localhost:27017",
+        hint: "Make sure MongoDB is running and properly configured",
       },
       { status: 500 }
     );
   }
 }
 
-// GET endpoint to fetch registrations for an event (optional - for admin)
+// GET endpoint to fetch registrations for an event (with populated participants)
 export async function GET(
   request: NextRequest,
   { params }: { params: Promise<{ eventname: string }> }
@@ -202,9 +262,11 @@ export async function GET(
     const { eventname } = await params;
     const eventName = decodeURIComponent(eventname);
 
-    const registrations = await Registration.find({ eventName }).sort({
-      createdAt: -1,
-    });
+    // Fetch registrations and populate participants
+    const registrations = await Registration.find({ eventName })
+      .populate("participants")
+      .sort({ createdAt: -1 })
+      .lean();
 
     return NextResponse.json(
       {
