@@ -14,7 +14,6 @@ export default function Home() {
           </h1>
           <p className="mt-2 text-gray-600">Your College Innovation Hub</p>
         </div>
-      </header>
 
       {/* Main Content */}
       <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
@@ -67,6 +66,10 @@ export default function Home() {
             reserved.
           </p>
         </div>
+      </div>
+
+      <footer className="absolute bottom-8 text-gray-400 text-sm">
+        &copy; 2025 IISF. All rights reserved.
       </footer>
     </div>
   );

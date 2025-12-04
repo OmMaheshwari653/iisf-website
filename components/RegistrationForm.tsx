@@ -119,30 +119,30 @@ export default function RegistrationForm({ eventName }: RegistrationFormProps) {
   };
 
   return (
-    <div className="max-w-3xl mx-auto p-6 bg-white rounded-lg shadow-lg">
-      <h1 className="text-3xl font-bold text-center mb-6 text-gray-800">
-        Event Registration: {eventName}
+    <div className="max-w-3xl mx-auto p-8 bg-white rounded-2xl shadow-xl border border-gray-100">
+      <h1 className="text-3xl font-bold text-center mb-8 text-[#1E293B]">
+        Event Registration: <span className="text-[#1A4DB3]">{eventName}</span>
       </h1>
 
       {message && (
         <div
-          className={`mb-4 p-4 rounded ${message.type === "success"
-              ? "bg-green-100 text-green-800"
-              : "bg-red-100 text-red-800"
+          className={`mb-6 p-4 rounded-lg border ${message.type === "success"
+            ? "bg-green-50 text-green-800 border-green-200"
+            : "bg-red-50 text-red-800 border-red-200"
             }`}
         >
           {message.text}
         </div>
       )}
 
-      <form onSubmit={handleSubmit} className="space-y-6">
+      <form onSubmit={handleSubmit} className="space-y-8">
         {/* Participation Type */}
-        <div className="bg-gray-50 p-4 rounded-lg border border-gray-200">
-          <label className="block text-lg font-semibold mb-3 text-gray-800">
+        <div className="bg-gray-50 p-6 rounded-xl border border-gray-200">
+          <label className="block text-lg font-semibold mb-4 text-[#1E293B]">
             Participation Type
           </label>
-          <div className="flex gap-6">
-            <label className="flex items-center cursor-pointer">
+          <div className="flex gap-8">
+            <label className="flex items-center cursor-pointer group">
               <input
                 type="radio"
                 value="solo"
@@ -152,21 +152,21 @@ export default function RegistrationForm({ eventName }: RegistrationFormProps) {
                   setTeamMembers([]);
                   setTeamName("");
                 }}
-                className="w-4 h-4 text-blue-600 accent-blue-600"
+                className="w-5 h-5 text-[#1A4DB3] accent-[#1A4DB3] focus:ring-[#1A4DB3]"
               />
-              <span className="ml-2 text-gray-800 font-medium">
+              <span className="ml-3 text-[#1E293B] font-medium group-hover:text-[#1A4DB3] transition-colors">
                 Solo Participation
               </span>
             </label>
-            <label className="flex items-center cursor-pointer">
+            <label className="flex items-center cursor-pointer group">
               <input
                 type="radio"
                 value="team"
                 checked={participationType === "team"}
                 onChange={() => setParticipationType("team")}
-                className="w-4 h-4 text-blue-600 accent-blue-600"
+                className="w-5 h-5 text-[#1A4DB3] accent-[#1A4DB3] focus:ring-[#1A4DB3]"
               />
-              <span className="ml-2 text-gray-800 font-medium">
+              <span className="ml-3 text-[#1E293B] font-medium group-hover:text-[#1A4DB3] transition-colors">
                 Team Participation
               </span>
             </label>
@@ -175,12 +175,12 @@ export default function RegistrationForm({ eventName }: RegistrationFormProps) {
 
         {/* Team Name - Only for Team Participation */}
         {participationType === "team" && (
-          <div className="bg-purple-50 p-4 rounded-lg border border-purple-200">
-            <h2 className="text-xl font-semibold mb-3 text-gray-900">
+          <div className="bg-blue-50/30 p-6 rounded-xl border border-blue-100">
+            <h2 className="text-xl font-semibold mb-4 text-[#1E293B]">
               Team Information
             </h2>
             <div>
-              <label className="block text-sm font-medium mb-1 text-gray-800">
+              <label className="block text-sm font-medium mb-2 text-[#64748B]">
                 Team Name *
               </label>
               <input
@@ -189,23 +189,23 @@ export default function RegistrationForm({ eventName }: RegistrationFormProps) {
                 onChange={(e) => setTeamName(e.target.value)}
                 required={participationType === "team"}
                 placeholder="Enter your team name"
-                className="w-full px-3 py-2 border border-gray-400 rounded-md focus:ring-2 focus:ring-purple-500 focus:border-transparent bg-white text-black placeholder-gray-500"
+                className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#1A4DB3] focus:border-transparent bg-white text-[#1E293B] placeholder-gray-400 transition-all shadow-sm"
               />
             </div>
           </div>
         )}
 
         {/* Leader/Participant Details */}
-        <div className="bg-blue-50 p-4 rounded-lg border border-blue-200">
-          <h2 className="text-xl font-semibold mb-4 text-gray-900">
+        <div className="bg-white p-6 rounded-xl border border-gray-200 shadow-sm">
+          <h2 className="text-xl font-semibold mb-6 text-[#1E293B] border-b pb-2 border-gray-100">
             {participationType === "team"
               ? "Team Leader Details"
               : "Participant Details"}
           </h2>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
             <div>
-              <label className="block text-sm font-medium mb-1 text-gray-800">
+              <label className="block text-sm font-medium mb-2 text-[#64748B]">
                 Name *
               </label>
               <input
@@ -213,19 +213,19 @@ export default function RegistrationForm({ eventName }: RegistrationFormProps) {
                 value={leaderName}
                 onChange={(e) => setLeaderName(e.target.value)}
                 required
-                className="w-full px-3 py-2 border border-gray-400 rounded-md focus:ring-2 focus:ring-blue-500 focus:border-transparent bg-white text-black placeholder-gray-500"
+                className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#1A4DB3] focus:border-transparent bg-white text-[#1E293B] placeholder-gray-400 transition-all shadow-sm"
               />
             </div>
 
             <div>
-              <label className="block text-sm font-medium mb-1 text-gray-800">
+              <label className="block text-sm font-medium mb-2 text-[#64748B]">
                 Gender *
               </label>
               <select
                 value={leaderGender}
                 onChange={(e) => setLeaderGender(e.target.value)}
                 required
-                className="w-full px-3 py-2 border border-gray-400 rounded-md focus:ring-2 focus:ring-blue-500 focus:border-transparent bg-white text-black"
+                className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#1A4DB3] focus:border-transparent bg-white text-[#1E293B] transition-all shadow-sm"
               >
                 <option value="">Select Gender</option>
                 <option value="Male">Male</option>
@@ -235,7 +235,7 @@ export default function RegistrationForm({ eventName }: RegistrationFormProps) {
             </div>
 
             <div>
-              <label className="block text-sm font-medium mb-1 text-gray-800">
+              <label className="block text-sm font-medium mb-2 text-[#64748B]">
                 Roll Number *
               </label>
               <input
@@ -243,12 +243,12 @@ export default function RegistrationForm({ eventName }: RegistrationFormProps) {
                 value={leaderRollNumber}
                 onChange={(e) => setLeaderRollNumber(e.target.value)}
                 required
-                className="w-full px-3 py-2 border border-gray-400 rounded-md focus:ring-2 focus:ring-blue-500 focus:border-transparent bg-white text-black placeholder-gray-500"
+                className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#1A4DB3] focus:border-transparent bg-white text-[#1E293B] placeholder-gray-400 transition-all shadow-sm"
               />
             </div>
 
             <div>
-              <label className="block text-sm font-medium mb-1 text-gray-800">
+              <label className="block text-sm font-medium mb-2 text-[#64748B]">
                 Contact Number *
               </label>
               <input
@@ -258,12 +258,12 @@ export default function RegistrationForm({ eventName }: RegistrationFormProps) {
                 onChange={(e) => setLeaderContactNumber(e.target.value)}
                 required
                 placeholder="10-digit number"
-                className="w-full px-3 py-2 border border-gray-400 rounded-md focus:ring-2 focus:ring-blue-500 focus:border-transparent bg-white text-black placeholder-gray-500"
+                className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#1A4DB3] focus:border-transparent bg-white text-[#1E293B] placeholder-gray-400 transition-all shadow-sm"
               />
             </div>
 
             <div className="md:col-span-2">
-              <label className="block text-sm font-medium mb-1 text-gray-800">
+              <label className="block text-sm font-medium mb-2 text-[#64748B]">
                 Email *
               </label>
               <input
@@ -271,7 +271,7 @@ export default function RegistrationForm({ eventName }: RegistrationFormProps) {
                 value={leaderEmail}
                 onChange={(e) => setLeaderEmail(e.target.value)}
                 required
-                className="w-full px-3 py-2 border border-gray-400 rounded-md focus:ring-2 focus:ring-blue-500 focus:border-transparent bg-white text-black placeholder-gray-500"
+                className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#1A4DB3] focus:border-transparent bg-white text-[#1E293B] placeholder-gray-400 transition-all shadow-sm"
               />
             </div>
           </div>
@@ -279,23 +279,23 @@ export default function RegistrationForm({ eventName }: RegistrationFormProps) {
 
         {/* Team Members */}
         {participationType === "team" && (
-          <div className="bg-green-50 p-4 rounded-lg border border-green-200">
-            <div className="flex justify-between items-center mb-4">
-              <h2 className="text-xl font-semibold text-gray-900">
+          <div className="bg-gray-50 p-6 rounded-xl border border-gray-200">
+            <div className="flex justify-between items-center mb-6">
+              <h2 className="text-xl font-semibold text-[#1E293B]">
                 Team Members ({teamMembers.length}/3)
               </h2>
               <button
                 type="button"
                 onClick={addTeamMember}
                 disabled={teamMembers.length >= 3}
-                className="px-4 py-2 bg-green-600 text-white font-semibold rounded-md hover:bg-green-700 disabled:bg-gray-400 disabled:cursor-not-allowed transition"
+                className="px-5 py-2 bg-[#1A4DB3] text-white font-semibold rounded-full hover:bg-[#F5A623] disabled:bg-gray-300 disabled:cursor-not-allowed transition-all shadow-md hover:shadow-lg"
               >
                 + Add Member
               </button>
             </div>
 
             {teamMembers.length === 0 && (
-              <p className="text-gray-700 text-sm mb-4 font-medium">
+              <p className="text-[#64748B] text-sm mb-4 font-medium italic text-center">
                 Add at least 1 member (Team size: 2-4 including leader)
               </p>
             )}
@@ -303,24 +303,24 @@ export default function RegistrationForm({ eventName }: RegistrationFormProps) {
             {teamMembers.map((member, index) => (
               <div
                 key={index}
-                className="bg-white p-4 rounded-lg mb-4 border-2 border-gray-300 shadow-sm"
+                className="bg-white p-6 rounded-xl mb-4 border border-gray-200 shadow-sm relative"
               >
-                <div className="flex justify-between items-center mb-3">
-                  <h3 className="font-semibold text-gray-900">
+                <div className="flex justify-between items-center mb-4">
+                  <h3 className="font-semibold text-[#1E293B]">
                     Member {index + 1}
                   </h3>
                   <button
                     type="button"
                     onClick={() => removeTeamMember(index)}
-                    className="text-red-600 hover:text-red-800 font-semibold"
+                    className="text-red-500 hover:text-red-700 font-semibold text-sm transition-colors"
                   >
                     Remove
                   </button>
                 </div>
 
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                   <div>
-                    <label className="block text-sm font-medium mb-1 text-gray-800">
+                    <label className="block text-sm font-medium mb-2 text-[#64748B]">
                       Name *
                     </label>
                     <input
@@ -330,12 +330,12 @@ export default function RegistrationForm({ eventName }: RegistrationFormProps) {
                         updateTeamMember(index, "name", e.target.value)
                       }
                       required
-                      className="w-full px-3 py-2 border border-gray-400 rounded-md focus:ring-2 focus:ring-blue-500 focus:border-transparent bg-white text-black placeholder-gray-500"
+                      className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#1A4DB3] focus:border-transparent bg-white text-[#1E293B] placeholder-gray-400 transition-all shadow-sm"
                     />
                   </div>
 
                   <div>
-                    <label className="block text-sm font-medium mb-1 text-gray-800">
+                    <label className="block text-sm font-medium mb-2 text-[#64748B]">
                       Gender *
                     </label>
                     <select
@@ -344,7 +344,7 @@ export default function RegistrationForm({ eventName }: RegistrationFormProps) {
                         updateTeamMember(index, "gender", e.target.value)
                       }
                       required
-                      className="w-full px-3 py-2 border border-gray-400 rounded-md focus:ring-2 focus:ring-blue-500 focus:border-transparent bg-white text-black"
+                      className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#1A4DB3] focus:border-transparent bg-white text-[#1E293B] transition-all shadow-sm"
                     >
                       <option value="">Select Gender</option>
                       <option value="Male">Male</option>
@@ -354,7 +354,7 @@ export default function RegistrationForm({ eventName }: RegistrationFormProps) {
                   </div>
 
                   <div>
-                    <label className="block text-sm font-medium mb-1 text-gray-800">
+                    <label className="block text-sm font-medium mb-2 text-[#64748B]">
                       Roll Number *
                     </label>
                     <input
@@ -364,12 +364,12 @@ export default function RegistrationForm({ eventName }: RegistrationFormProps) {
                         updateTeamMember(index, "rollNumber", e.target.value)
                       }
                       required
-                      className="w-full px-3 py-2 border border-gray-400 rounded-md focus:ring-2 focus:ring-blue-500 focus:border-transparent bg-white text-black placeholder-gray-500"
+                      className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#1A4DB3] focus:border-transparent bg-white text-[#1E293B] placeholder-gray-400 transition-all shadow-sm"
                     />
                   </div>
 
                   <div>
-                    <label className="block text-sm font-medium mb-1 text-gray-800">
+                    <label className="block text-sm font-medium mb-2 text-[#64748B]">
                       Contact Number *
                     </label>
                     <input
@@ -381,12 +381,12 @@ export default function RegistrationForm({ eventName }: RegistrationFormProps) {
                       }
                       required
                       placeholder="10-digit number"
-                      className="w-full px-3 py-2 border border-gray-400 rounded-md focus:ring-2 focus:ring-blue-500 focus:border-transparent bg-white text-black placeholder-gray-500"
+                      className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#1A4DB3] focus:border-transparent bg-white text-[#1E293B] placeholder-gray-400 transition-all shadow-sm"
                     />
                   </div>
 
                   <div className="md:col-span-2">
-                    <label className="block text-sm font-medium mb-1 text-gray-800">
+                    <label className="block text-sm font-medium mb-2 text-[#64748B]">
                       Email *
                     </label>
                     <input
@@ -396,7 +396,7 @@ export default function RegistrationForm({ eventName }: RegistrationFormProps) {
                         updateTeamMember(index, "email", e.target.value)
                       }
                       required
-                      className="w-full px-3 py-2 border border-gray-400 rounded-md focus:ring-2 focus:ring-blue-500 focus:border-transparent bg-white text-black placeholder-gray-500"
+                      className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#1A4DB3] focus:border-transparent bg-white text-[#1E293B] placeholder-gray-400 transition-all shadow-sm"
                     />
                   </div>
                 </div>
@@ -411,13 +411,13 @@ export default function RegistrationForm({ eventName }: RegistrationFormProps) {
           disabled={
             loading || (participationType === "team" && teamMembers.length < 1)
           }
-          className="w-full py-3 px-4 bg-blue-600 text-white font-semibold rounded-md hover:bg-blue-700 disabled:bg-gray-400 disabled:cursor-not-allowed transition text-lg"
+          className="w-full py-4 px-6 bg-[#1A4DB3] text-white font-bold rounded-full hover:bg-[#F5A623] disabled:bg-gray-300 disabled:cursor-not-allowed transition-all shadow-lg hover:shadow-xl transform hover:-translate-y-1 text-lg"
         >
           {loading ? "Submitting..." : "Register"}
         </button>
 
         {participationType === "team" && teamMembers.length < 1 && (
-          <p className="text-red-600 text-sm text-center">
+          <p className="text-red-500 text-sm text-center font-medium">
             Please add at least 1 team member to register as a team
           </p>
         )}
