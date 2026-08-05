@@ -38,7 +38,7 @@ export const PATTERNS = {
   EMAIL: /^[^\s@]+@[^\s@]+\.[^\s@]+$/,
   PHONE: /^[0-9]{10}$/,
   SLUG: /^[a-z0-9-]+$/,
-  ROLL_NUMBER: /^[A-Z0-9]+$/i,
+  ROLL_NUMBER: /^[0-9]{5}$/,
   DATE: /^\d{4}-\d{2}-\d{2}$/,
 } as const;
 
@@ -99,6 +99,13 @@ export function validateParticipant(
 
   if (!isNonEmptyString(data.rollNumber)) {
     return { isValid: false, error: `${label} roll number is required` };
+  }
+
+  if (!PATTERNS.ROLL_NUMBER.test(data.rollNumber.trim())) {
+    return {
+      isValid: false,
+      error: `${label} roll number must be exactly 5 digits`,
+    };
   }
 
   if (!isNonEmptyString(data.contactNumber)) {

@@ -19,9 +19,14 @@ export async function GET(request: NextRequest, { params }: RouteParams) {
     await dbConnect();
 
     const { slug } = await params;
-    const eventName = decodeURIComponent(slug);
+    const decodedSlug = decodeURIComponent(slug);
 
-    const registrations = await Registration.find({ eventName }).lean();
+    const event = await Event.findOne({ slug: decodedSlug }).lean();
+    if (!event) {
+      return notFoundResponse("Event not found");
+    }
+
+    const registrations = await Registration.find({ eventName: event.name }).lean();
     const registrationIds = registrations.map((r) => r._id);
 
     const participants = await Participant.find({
@@ -73,9 +78,9 @@ export async function DELETE(request: NextRequest, { params }: RouteParams) {
     await dbConnect();
 
     const { slug } = await params;
-    const eventName = decodeURIComponent(slug);
+    const decodedSlug = decodeURIComponent(slug);
 
-    const event = await Event.findOne({ name: eventName });
+    const event = await Event.findOne({ slug: decodedSlug });
     if (!event) {
       return notFoundResponse("Event not found");
     }
@@ -89,16 +94,16 @@ export async function DELETE(request: NextRequest, { params }: RouteParams) {
       }
     }
 
-    const registrations = await Registration.find({ eventName }).lean();
+    const registrations = await Registration.find({ eventName: event.name }).lean();
     const registrationIds = registrations.map((r) => r._id);
 
     await Participant.deleteMany({ registrationId: { $in: registrationIds } });
-    await Registration.deleteMany({ eventName });
-    await Event.deleteOne({ name: eventName });
+    await Registration.deleteMany({ eventName: event.name });
+    await Event.deleteOne({ _id: event._id });
 
     return successResponse(
       {
-        deletedEvent: eventName,
+        deletedEvent: event.name,
         deletedRegistrations: registrations.length,
       },
       "Event and all registrations deleted successfully",

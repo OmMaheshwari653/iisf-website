@@ -67,7 +67,7 @@ const EventSchema = new Schema<IEvent>(
     },
     maxTeamSize: {
       type: Number,
-      default: 4,
+      default: 6,
       min: 1,
     },
     minTeamSize: {

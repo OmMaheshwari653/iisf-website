@@ -31,6 +31,8 @@ export default async function EventRegistrationPage({
       eventImage={event.image || undefined}
       rulebook={event.rulebook || undefined}
       whatsappLink={event.whatsappLink || undefined}
+      minTeamSize={event.minTeamSize}
+      maxTeamSize={event.maxTeamSize}
     />
   );
 }

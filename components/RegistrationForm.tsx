@@ -22,6 +22,8 @@ interface RegistrationFormProps {
   eventImage?: string;
   rulebook?: string;
   whatsappLink?: string;
+  minTeamSize?: number;
+  maxTeamSize?: number;
 }
 
 export default function RegistrationForm({
@@ -32,6 +34,8 @@ export default function RegistrationForm({
   eventImage,
   rulebook,
   whatsappLink,
+  minTeamSize = 1,
+  maxTeamSize = 6,
 }: RegistrationFormProps) {
   const [showRegistration, setShowRegistration] = useState(false);
   const [registrationType, setRegistrationType] = useState<
@@ -48,7 +52,7 @@ export default function RegistrationForm({
   } | null>(null);
 
   const addParticipant = () => {
-    if (participants.length >= 6) return;
+    if (participants.length >= maxTeamSize) return;
     setParticipants([
       ...participants,
       {
@@ -163,15 +167,15 @@ export default function RegistrationForm({
 
       {!showRegistration ? (
         /* Event Details Section */
-        <section className="pt-24 pb-20 px-4 sm:px-6 lg:px-8">
+        <section className="pt-28 sm:pt-32 pb-20 px-4 sm:px-6 lg:px-8">
           <div className="max-w-4xl mx-auto">
-            {/* Event Image - 4:5 Poster Ratio */}
-            <div className="relative w-full aspect-[4/5] max-h-[600px] rounded-2xl overflow-hidden mb-8 shadow-2xl">
+            {/* Event Image */}
+            <div className="relative w-full aspect-[4/5] overflow-hidden mb-8">
               {eventImage ? (
                 <img
                   src={eventImage}
                   alt={eventName}
-                  className="w-full h-full object-cover"
+                  className="w-full h-full object-contain"
                 />
               ) : (
                 <div className="w-full h-full bg-gradient-to-br from-orange-100 to-amber-50 flex items-center justify-center">
@@ -180,24 +184,23 @@ export default function RegistrationForm({
                   </span>
                 </div>
               )}
-              {/* Gradient overlay */}
-              <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent" />
-              {/* Event Date Badge */}
-              {eventDate && (
-                <div className="absolute top-4 right-4 bg-white/90 backdrop-blur-sm rounded-lg px-4 py-2 shadow-lg">
-                  <p className="text-sm font-bold text-orange-600">
-                    {eventDate}
-                  </p>
-                </div>
-              )}
             </div>
 
             {/* Event Name */}
-            <h1 className="text-3xl sm:text-4xl md:text-5xl font-black text-center mb-6">
+            <h1 className="text-3xl sm:text-4xl md:text-5xl font-black text-center mb-4">
               <span className="bg-gradient-to-r from-orange-500 via-amber-500 to-orange-500 bg-clip-text text-transparent">
                 {eventName}
               </span>
             </h1>
+
+            {/* Event Date Below Event Name */}
+            {eventDate && (
+              <div className="flex justify-center mb-6">
+                <span className="bg-orange-100 text-orange-700 px-4 py-1.5 rounded-full font-bold text-sm shadow-sm border border-orange-200/50">
+                  {eventDate}
+                </span>
+              </div>
+            )}
 
             {/* Event Description */}
             {eventDescription && (

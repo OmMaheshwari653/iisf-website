@@ -39,7 +39,7 @@ const ParticipantSchema = new Schema<IParticipant>(
       type: String,
       required: [true, "Roll number is required"],
       trim: true,
-      uppercase: true,
+      match: [/^[0-9]{5}$/, "Roll number must be exactly 5 digits"],
     },
     contactNumber: {
       type: String,

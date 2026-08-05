@@ -159,26 +159,26 @@ function UpcomingEventsAd() {
   });
 
   return (
-    <div className="fixed top-16 sm:top-20 left-0 right-0 z-40 bg-gradient-to-r from-slate-900 via-purple-900 to-slate-900 text-white overflow-hidden shadow-lg">
+    <div className="fixed top-16 sm:top-20 left-0 right-0 z-40 bg-gradient-to-r from-slate-900 via-orange-950 to-slate-900 text-white overflow-hidden shadow-lg border-b border-orange-500/20">
       {/* Animated gradient line at top */}
-      <div className="h-[2px] bg-gradient-to-r from-transparent via-purple-400 to-transparent animate-pulse" />
+      <div className="h-[2px] bg-gradient-to-r from-transparent via-orange-500 to-transparent animate-pulse" />
 
       <div className="max-w-7xl mx-auto px-4 py-3">
         <div className="flex flex-col sm:flex-row items-center justify-between gap-3">
           {/* Left - Event Info */}
           <div className="flex items-center gap-4 flex-wrap justify-center sm:justify-start">
             {/* Live Badge */}
-            <div className="flex items-center gap-2 bg-gradient-to-r from-purple-500 to-pink-500 text-white text-xs font-bold px-3 py-1 rounded-full shadow-lg shadow-purple-500/30">
+            <div className="flex items-center gap-2 bg-gradient-to-r from-orange-500 to-amber-500 text-white text-xs font-bold px-3 py-1 rounded-full shadow-lg shadow-orange-500/30">
               <span className="w-2 h-2 bg-white rounded-full animate-ping" />
               UPCOMING
             </div>
 
             {/* Event Name */}
             <div className="text-center sm:text-left">
-              <h3 className="text-lg sm:text-xl font-black tracking-tight">
+              <h3 className="text-lg sm:text-xl font-black tracking-tight text-white">
                 {currentEvent.name}
               </h3>
-              <p className="text-purple-300 text-xs sm:text-sm">
+              <p className="text-orange-300 text-xs sm:text-sm">
                 {formattedDate}
               </p>
             </div>
@@ -195,13 +195,13 @@ function UpcomingEventsAd() {
               ].map((item, idx) => (
                 <div
                   key={idx}
-                  className="text-center bg-white/10 backdrop-blur-sm rounded-lg px-2 sm:px-3 py-1"
+                  className="text-center bg-white/10 backdrop-blur-sm rounded-lg px-2 sm:px-3 py-1 border border-orange-500/20"
                 >
                   <div className="flex items-baseline gap-0.5">
                     <span className="text-xl sm:text-2xl font-black tabular-nums text-white">
                       {String(item.value).padStart(2, "0")}
                     </span>
-                    <span className="text-purple-300 text-[10px] font-medium">
+                    <span className="text-orange-300 text-[10px] font-medium">
                       {item.label}
                     </span>
                   </div>
@@ -214,7 +214,7 @@ function UpcomingEventsAd() {
           <div className="flex items-center gap-3">
             {/* Register Button */}
             <Link href={`/register/${currentEvent.slug}`}>
-              <button className="bg-gradient-to-r from-purple-500 to-pink-500 text-white font-bold py-2 px-5 rounded-full hover:from-purple-600 hover:to-pink-600 transition-all duration-300 flex items-center gap-2 text-sm shadow-lg shadow-purple-500/30">
+              <button className="bg-gradient-to-r from-orange-500 to-amber-500 text-white font-bold py-2 px-5 rounded-full hover:from-orange-600 hover:to-amber-600 transition-all duration-300 flex items-center gap-2 text-sm shadow-lg shadow-orange-500/30">
                 Register
                 <svg
                   className="w-4 h-4"
@@ -283,18 +283,15 @@ function VisionSection() {
     <section className="py-20 px-4 sm:px-6 lg:px-8 bg-white">
       <div className="max-w-7xl mx-auto">
         <div className="grid lg:grid-cols-2 gap-12 lg:gap-16 items-center">
-          <div className="relative">
-            <div className="absolute -inset-4 bg-gradient-to-br from-orange-100 via-amber-50 to-blue-100 rounded-3xl" />
-            <div className="relative overflow-hidden rounded-2xl shadow-2xl">
-              <Image
-                src="/professors.jpg"
-                alt="IISF Faculty"
-                width={600}
-                height={500}
-                className="w-full h-auto object-cover"
-                priority
-              />
-            </div>
+          <div className="relative flex justify-center items-center">
+            <Image
+              src="/professors.jpg"
+              alt="IISF Faculty"
+              width={600}
+              height={500}
+              className="w-full h-auto object-contain"
+              priority
+            />
           </div>
 
           <div className="lg:pl-8">

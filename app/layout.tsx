@@ -17,6 +17,9 @@ export const metadata: Metadata = {
   title: "IISF - Innovation & Incubation Startup Foundation",
   description:
     "Your College Innovation Hub - Register for exciting events and competitions",
+  icons: {
+    icon: "/iisf-logo.png",
+  },
 };
 
 export default function RootLayout({
