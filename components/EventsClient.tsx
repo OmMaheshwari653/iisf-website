@@ -4,6 +4,7 @@ import Link from "next/link";
 import Image from "next/image";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
+import { Calendar, Rocket, Lightbulb, Handshake } from "lucide-react";
 
 interface Event {
   _id: string;
@@ -63,7 +64,7 @@ export default function EventsClient({ events }: EventsClientProps) {
           {events.length === 0 ? (
             <div className="text-center py-20">
               <div className="w-24 h-24 mx-auto mb-6 rounded-full bg-slate-100 flex items-center justify-center">
-                <span className="text-5xl">📅</span>
+                <Calendar className="w-10 h-10 text-slate-400" />
               </div>
               <h3 className="text-2xl font-bold text-slate-900 mb-3">
                 No Events Available
@@ -126,21 +127,21 @@ export default function EventsClient({ events }: EventsClientProps) {
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
             {[
               {
-                icon: "🚀",
+                Icon: Rocket,
                 title: "Innovation",
                 description:
                   "Foster creativity and develop groundbreaking solutions",
                 gradient: "from-orange-500 to-amber-500",
               },
               {
-                icon: "💡",
+                Icon: Lightbulb,
                 title: "Incubation",
                 description:
                   "Transform ideas into successful startups with mentorship",
                 gradient: "from-blue-500 to-cyan-500",
               },
               {
-                icon: "🤝",
+                Icon: Handshake,
                 title: "Community",
                 description:
                   "Connect with like-minded innovators and entrepreneurs",
@@ -154,7 +155,7 @@ export default function EventsClient({ events }: EventsClientProps) {
                 <div
                   className={`w-16 h-16 mx-auto rounded-2xl bg-gradient-to-br ${feature.gradient} flex items-center justify-center mb-5 shadow-lg text-white`}
                 >
-                  <span className="text-3xl">{feature.icon}</span>
+                  <feature.Icon className="w-8 h-8" />
                 </div>
                 <h3 className="text-xl font-bold text-slate-900 mb-3">
                   {feature.title}

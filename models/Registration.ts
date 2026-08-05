@@ -60,17 +60,17 @@ const RegistrationSchema = new Schema<IRegistration>(
       type: Number,
       required: true,
       min: [1, "At least one participant is required"],
-      max: [4, "Maximum 4 participants allowed"],
+      max: [6, "Maximum 6 participants allowed"],
       validate: {
         validator: function (this: any, value: number) {
           if (this.isTeam) {
-            return value >= 2 && value <= 4;
+            return value >= 2 && value <= 6;
           } else {
             return value === 1;
           }
         },
         message:
-          "Individual registration must have 1 participant, team registration must have 2-4 participants",
+          "Individual registration must have 1 participant, team registration must have 2-6 participants",
       },
     },
   },

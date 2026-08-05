@@ -6,6 +6,7 @@ import Link from "next/link";
 import toast from "react-hot-toast";
 import Navbar from "@/components/Navbar";
 import ConfirmDialog from "@/components/ConfirmDialog";
+import { Brain, Wrench, TrendingUp, Target, Monitor, Wallet, Building2, Mail, Phone, GraduationCap, School, Users, Search, CheckCircle, XCircle, Trash2, MousePointerClick } from "lucide-react";
 
 interface IncubationApplication {
   _id: string;
@@ -43,16 +44,16 @@ const statusColors = {
 };
 
 const stageLabels = {
-  idea: { label: "Idea Stage", icon: "🧠" },
-  mvp: { label: "MVP/Prototype", icon: "🛠️" },
-  "early-traction": { label: "Early Traction", icon: "📈" },
+  idea: { label: "Idea Stage", Icon: Brain },
+  mvp: { label: "MVP/Prototype", Icon: Wrench },
+  "early-traction": { label: "Early Traction", Icon: TrendingUp },
 };
 
 const supportLabels = {
-  mentorship: { label: "Mentorship", icon: "🎯" },
-  technical: { label: "Technical", icon: "💻" },
-  funding: { label: "Funding", icon: "💰" },
-  coworking: { label: "Co-working", icon: "🏢" },
+  mentorship: { label: "Mentorship", Icon: Target },
+  technical: { label: "Technical", Icon: Monitor },
+  funding: { label: "Funding", Icon: Wallet },
+  coworking: { label: "Co-working", Icon: Building2 },
 };
 
 export default function AdminIncubationPage() {
@@ -342,8 +343,8 @@ export default function AdminIncubationPage() {
                             {app.founderName}
                           </p>
                           <p className="text-xs text-slate-500 mt-1">
-                            {stageLabels[app.currentStage].icon}{" "}
-                            {stageLabels[app.currentStage].label} • 👥{" "}
+                            {(() => { const StageIcon = stageLabels[app.currentStage].Icon; return <StageIcon className="w-3 h-3 inline mr-1" />; })()}{" "}
+                            {stageLabels[app.currentStage].label} • <Users className="w-3 h-3 inline mx-1" />{" "}
                             {app.teamSize} members
                           </p>
                         </div>
@@ -393,19 +394,19 @@ export default function AdminIncubationPage() {
                       {selectedApp.founderName}
                     </p>
                     <p className="text-sm text-slate-600">
-                      📧 {selectedApp.founderEmail}
+                      <Mail className="w-3.5 h-3.5 inline mr-1 text-orange-500" /> {selectedApp.founderEmail}
                     </p>
                     <p className="text-sm text-slate-600">
-                      📱 {selectedApp.founderPhone}
+                      <Phone className="w-3.5 h-3.5 inline mr-1 text-orange-500" /> {selectedApp.founderPhone}
                     </p>
                     <p className="text-sm text-slate-600">
-                      🎓 {selectedApp.founderYear}, {selectedApp.founderBranch}
+                      <GraduationCap className="w-3.5 h-3.5 inline mr-1 text-orange-500" /> {selectedApp.founderYear}, {selectedApp.founderBranch}
                     </p>
                     <p className="text-sm text-slate-600">
-                      🏫 {selectedApp.founderCollege}
+                      <School className="w-3.5 h-3.5 inline mr-1 text-orange-500" /> {selectedApp.founderCollege}
                     </p>
                     <p className="text-sm text-slate-600">
-                      👥 Team Size: {selectedApp.teamSize}
+                      <Users className="w-3.5 h-3.5 inline mr-1 text-orange-500" /> Team Size: {selectedApp.teamSize}
                     </p>
                   </div>
 
@@ -414,17 +415,17 @@ export default function AdminIncubationPage() {
                     <h4 className="text-xs font-bold text-slate-500 uppercase mb-2">
                       Stage & Support
                     </h4>
-                    <p className="text-sm text-slate-900 mb-2">
-                      {stageLabels[selectedApp.currentStage].icon}{" "}
+                    <p className="text-sm text-slate-900 mb-2 flex items-center gap-1">
+                      {(() => { const StageIcon = stageLabels[selectedApp.currentStage].Icon; return <StageIcon className="w-4 h-4 text-orange-500" />; })()}{" "}
                       {stageLabels[selectedApp.currentStage].label}
                     </p>
                     <div className="flex flex-wrap gap-1">
                       {selectedApp.supportNeeded.map((s) => (
                         <span
                           key={s}
-                          className="px-2 py-1 text-xs bg-orange-100 text-orange-700 rounded-full"
+                          className="px-2 py-1 text-xs bg-orange-100 text-orange-700 rounded-full flex items-center gap-1"
                         >
-                          {supportLabels[s as keyof typeof supportLabels]?.icon}{" "}
+                          {(() => { const SupportIcon = supportLabels[s as keyof typeof supportLabels]?.Icon; return SupportIcon ? <SupportIcon className="w-3 h-3" /> : null; })()}{" "}
                           {
                             supportLabels[s as keyof typeof supportLabels]
                               ?.label
@@ -483,9 +484,9 @@ export default function AdminIncubationPage() {
                           onClick={() =>
                             updateStatus(selectedApp._id, "reviewing")
                           }
-                          className="px-3 py-2 text-xs font-medium bg-blue-50 text-blue-600 border border-blue-200 rounded-lg hover:bg-blue-100 transition"
+                          className="px-3 py-2 text-xs font-medium bg-blue-50 text-blue-600 border border-blue-200 rounded-lg hover:bg-blue-100 transition flex items-center gap-1"
                         >
-                          🔍 Review
+                          <Search className="w-3 h-3" /> Review
                         </button>
                       )}
                       {selectedApp.status !== "approved" && (
@@ -493,9 +494,9 @@ export default function AdminIncubationPage() {
                           onClick={() =>
                             updateStatus(selectedApp._id, "approved")
                           }
-                          className="px-3 py-2 text-xs font-medium bg-green-50 text-green-600 border border-green-200 rounded-lg hover:bg-green-100 transition"
+                          className="px-3 py-2 text-xs font-medium bg-green-50 text-green-600 border border-green-200 rounded-lg hover:bg-green-100 transition flex items-center gap-1"
                         >
-                          ✅ Approve
+                          <CheckCircle className="w-3 h-3" /> Approve
                         </button>
                       )}
                       {selectedApp.status !== "rejected" && (
@@ -503,9 +504,9 @@ export default function AdminIncubationPage() {
                           onClick={() =>
                             updateStatus(selectedApp._id, "rejected")
                           }
-                          className="px-3 py-2 text-xs font-medium bg-red-50 text-red-600 border border-red-200 rounded-lg hover:bg-red-100 transition"
+                          className="px-3 py-2 text-xs font-medium bg-red-50 text-red-600 border border-red-200 rounded-lg hover:bg-red-100 transition flex items-center gap-1"
                         >
-                          ❌ Reject
+                          <XCircle className="w-3 h-3" /> Reject
                         </button>
                       )}
                       <button
@@ -515,16 +516,16 @@ export default function AdminIncubationPage() {
                             selectedApp.startupName,
                           )
                         }
-                        className="px-3 py-2 text-xs font-medium bg-slate-50 text-slate-600 border border-slate-200 rounded-lg hover:bg-slate-100 transition"
+                        className="px-3 py-2 text-xs font-medium bg-slate-50 text-slate-600 border border-slate-200 rounded-lg hover:bg-slate-100 transition flex items-center gap-1"
                       >
-                        🗑️ Delete
+                        <Trash2 className="w-3 h-3" /> Delete
                       </button>
                     </div>
                   </div>
                 </div>
               ) : (
                 <div className="flex flex-col items-center justify-center h-64 text-slate-400">
-                  <span className="text-4xl mb-2">👈</span>
+                  <MousePointerClick className="w-10 h-10 mb-2 text-slate-300" />
                   <p className="text-sm">
                     Select an application to view details
                   </p>

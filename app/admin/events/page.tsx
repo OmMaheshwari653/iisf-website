@@ -6,6 +6,7 @@ import Link from "next/link";
 import toast from "react-hot-toast";
 import Navbar from "@/components/Navbar";
 import ConfirmDialog from "@/components/ConfirmDialog";
+import { Calendar, Trash2, Trophy, User, Camera } from "lucide-react";
 
 interface Event {
   _id: string;
@@ -422,8 +423,8 @@ export default function AdminEventsPage() {
                           <p className="text-sm text-slate-600 mt-1">
                             {event.description}
                           </p>
-                          <p className="text-xs text-orange-600 mt-2">
-                            📅 {event.date}
+                          <p className="text-xs text-orange-600 mt-2 flex items-center gap-1">
+                            <Calendar className="w-3 h-3" /> {event.date}
                           </p>
                         </div>
                         <div className="flex items-center gap-4">
@@ -439,9 +440,9 @@ export default function AdminEventsPage() {
                           )}
                           <button
                             onClick={() => openDeleteEventDialog(event.name)}
-                            className="px-3 py-2 bg-red-50 text-red-600 border border-red-200 rounded-lg hover:bg-red-100 transition text-sm font-medium"
+                            className="px-3 py-2 bg-red-50 text-red-600 border border-red-200 rounded-lg hover:bg-red-100 transition text-sm font-medium flex items-center gap-1"
                           >
-                            🗑️
+                            <Trash2 className="w-4 h-4" />
                           </button>
                         </div>
                       </div>
@@ -537,9 +538,9 @@ export default function AdminEventsPage() {
                                       <div className="flex items-center gap-2">
                                         <span className="font-semibold text-slate-900">
                                           {reg.isTeam ? (
-                                            <>🏆 Team: {reg.teamName}</>
+                                            <><Trophy className="w-4 h-4 inline mr-1 text-amber-500" />Team: {reg.teamName}</>
                                           ) : (
-                                            <>👤 Individual</>
+                                            <><User className="w-4 h-4 inline mr-1 text-slate-400" />Individual</>
                                           )}
                                         </span>
                                         <span className="text-xs bg-blue-100 text-blue-600 px-2 py-1 rounded-full">
@@ -563,9 +564,9 @@ export default function AdminEventsPage() {
                                           reg.teamName,
                                         )
                                       }
-                                      className="px-3 py-1.5 bg-red-50 text-red-600 border border-red-200 rounded-lg hover:bg-red-100 transition text-xs font-medium"
+                                      className="px-3 py-1.5 bg-red-50 text-red-600 border border-red-200 rounded-lg hover:bg-red-100 transition text-xs font-medium flex items-center gap-1"
                                     >
-                                      🗑️ Delete
+                                      <Trash2 className="w-3 h-3" /> Delete
                                     </button>
                                   </div>
 
@@ -884,8 +885,8 @@ function EventFormModal({ onClose }: { onClose: () => void }) {
                     {uploading ? (
                       <span className="text-slate-500">Uploading...</span>
                     ) : (
-                      <span className="text-slate-500">
-                        📷 Click to upload image
+                      <span className="text-slate-500 flex items-center gap-2">
+                        <Camera className="w-4 h-4" /> Click to upload image
                       </span>
                     )}
                   </div>

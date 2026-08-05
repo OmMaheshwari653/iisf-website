@@ -164,10 +164,10 @@ export function validateRegistration(data: RegistrationData): ValidationResult {
       return { isValid: false, error: "Team name must be 3-100 characters" };
     }
 
-    if (teamMembers.length < 1 || teamMembers.length > 3) {
+    if (teamMembers.length < 1 || teamMembers.length > 5) {
       return {
         isValid: false,
-        error: "Team requires 1-3 additional members (2-4 total)",
+        error: "Team requires 1-5 additional members (2-6 total)",
       };
     }
 

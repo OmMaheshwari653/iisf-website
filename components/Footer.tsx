@@ -1,6 +1,7 @@
 "use client";
 
 import Link from "next/link";
+import { Heart } from "lucide-react";
 
 export default function Footer() {
   const quickLinks = [
@@ -234,7 +235,7 @@ export default function Footer() {
               Foundation KNIT Sultanpur. All rights reserved.
             </p>
             <p className="text-sm text-slate-500 flex items-center gap-1">
-              Made with <span className="text-red-500">❤</span> by IISF Team
+              Made with <Heart className="w-4 h-4 text-red-500 fill-red-500 inline" /> by IISF Team
             </p>
           </div>
         </div>

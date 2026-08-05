@@ -5,6 +5,7 @@ import { useRouter } from "next/navigation";
 import Link from "next/link";
 import toast from "react-hot-toast";
 import Navbar from "@/components/Navbar";
+import { Calendar, ClipboardList, Users, Rocket, Lightbulb } from "lucide-react";
 
 interface EventStats {
   eventName: string;
@@ -143,35 +144,35 @@ export default function AdminDashboard() {
     {
       title: "Total Events",
       value: data.eventsCount,
-      icon: "📅",
+      Icon: Calendar,
       color: "from-blue-500 to-indigo-500",
       link: "/admin/events",
     },
     {
       title: "Registrations",
       value: data.totalRegistrations,
-      icon: "📝",
+      Icon: ClipboardList,
       color: "from-orange-500 to-amber-500",
       link: "/admin/events",
     },
     {
       title: "Participants",
       value: data.totalParticipants,
-      icon: "👥",
+      Icon: Users,
       color: "from-green-500 to-emerald-500",
       link: "/admin/events",
     },
     {
       title: "Startups",
       value: data.startupsCount,
-      icon: "🚀",
+      Icon: Rocket,
       color: "from-purple-500 to-violet-500",
       link: "/admin/startups",
     },
     {
       title: "Incubation Apps",
       value: data.incubationApplications,
-      icon: "💡",
+      Icon: Lightbulb,
       color: "from-pink-500 to-rose-500",
       link: "/admin/incubation",
     },
@@ -211,7 +212,7 @@ export default function AdminDashboard() {
                     Manage events and view registrations
                   </p>
                 </div>
-                <span className="text-4xl">📅</span>
+                <Calendar className="w-10 h-10 text-white/80" />
               </div>
             </div>
           </Link>
@@ -225,7 +226,7 @@ export default function AdminDashboard() {
                     Manage startup portfolio
                   </p>
                 </div>
-                <span className="text-4xl">🚀</span>
+                <Rocket className="w-10 h-10 text-white/80" />
               </div>
             </div>
           </Link>
@@ -239,7 +240,7 @@ export default function AdminDashboard() {
                     Review new applications
                   </p>
                 </div>
-                <span className="text-4xl">💡</span>
+                <Lightbulb className="w-10 h-10 text-white/80" />
               </div>
             </div>
           </Link>
@@ -250,7 +251,9 @@ export default function AdminDashboard() {
             <Link key={card.title} href={card.link}>
               <div className="rounded-xl border border-slate-200 bg-white p-5 shadow-sm hover:shadow-md hover:border-slate-300 transition cursor-pointer">
                 <div className="flex items-center justify-between mb-3">
-                  <span className="text-2xl">{card.icon}</span>
+                  <div className={`w-9 h-9 rounded-lg bg-gradient-to-br ${card.color} flex items-center justify-center`}>
+                    <card.Icon className="w-5 h-5 text-white" />
+                  </div>
                   <div
                     className={`w-8 h-8 rounded-lg bg-gradient-to-br ${card.color} opacity-20`}
                   />

@@ -5,6 +5,7 @@ import toast from "react-hot-toast";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import confetti from "canvas-confetti";
+import { User, Lightbulb, MapPin, Handshake, Brain, Wrench, TrendingUp, Target, Monitor, Wallet, Building2, PartyPopper, Rocket } from "lucide-react";
 
 interface FormData {
   // Basic Info
@@ -32,11 +33,11 @@ const sections = [
     id: 1,
     title: "Basic Information",
     subtitle: "Tell us about you",
-    icon: "👤",
+    Icon: User,
   },
-  { id: 2, title: "Problem & Solution", subtitle: "Your big idea", icon: "💡" },
-  { id: 3, title: "Current Stage", subtitle: "Where are you now?", icon: "📍" },
-  { id: 4, title: "Support Needed", subtitle: "How can we help?", icon: "🤝" },
+  { id: 2, title: "Problem & Solution", subtitle: "Your big idea", Icon: Lightbulb },
+  { id: 3, title: "Current Stage", subtitle: "Where are you now?", Icon: MapPin },
+  { id: 4, title: "Support Needed", subtitle: "How can we help?", Icon: Handshake },
 ];
 
 const years = [
@@ -63,21 +64,21 @@ const stages = [
     id: "idea",
     label: "Idea Stage",
     description: "Just in your mind",
-    icon: "🧠",
+    Icon: Brain,
     color: "from-purple-500 to-indigo-500",
   },
   {
     id: "mvp",
     label: "MVP/Prototype",
     description: "Basic model ready",
-    icon: "🛠️",
+    Icon: Wrench,
     color: "from-blue-500 to-cyan-500",
   },
   {
     id: "early-traction",
     label: "Early Traction",
     description: "Some users already",
-    icon: "📈",
+    Icon: TrendingUp,
     color: "from-green-500 to-emerald-500",
   },
 ];
@@ -87,25 +88,25 @@ const supportOptions = [
     id: "mentorship",
     label: "Mentorship",
     description: "Expert guidance",
-    icon: "🎯",
+    Icon: Target,
   },
   {
     id: "technical",
     label: "Technical Help",
     description: "Development support",
-    icon: "💻",
+    Icon: Monitor,
   },
   {
     id: "funding",
     label: "Funding",
     description: "Financial support",
-    icon: "💰",
+    Icon: Wallet,
   },
   {
     id: "coworking",
     label: "Co-working Space",
     description: "Workspace access",
-    icon: "🏢",
+    Icon: Building2,
   },
 ];
 
@@ -277,7 +278,7 @@ export default function IncubatePage() {
       if (data.success) {
         setIsSubmitted(true);
         triggerConfetti();
-        toast.success("Application submitted successfully! 🎉");
+        toast.success("Application submitted successfully!");
       } else {
         toast.error(data.error || "Failed to submit application");
       }
@@ -297,7 +298,7 @@ export default function IncubatePage() {
         <div className="flex items-center justify-center min-h-screen px-4 pt-20">
           <div className="max-w-lg w-full text-center">
             <div className="w-32 h-32 mx-auto mb-8 rounded-full bg-gradient-to-br from-green-400 to-emerald-500 flex items-center justify-center">
-              <span className="text-6xl">🎉</span>
+              <PartyPopper className="w-16 h-16 text-white" />
             </div>
             <h1 className="text-3xl sm:text-4xl font-black text-slate-900 mb-4">
               Application Submitted!
@@ -382,13 +383,17 @@ export default function IncubatePage() {
                   <div
                     className={`w-12 h-12 sm:w-14 sm:h-14 rounded-full flex items-center justify-center text-xl sm:text-2xl mb-2 transition-all duration-300 ${
                       section.id === currentSection
-                        ? "bg-gradient-to-r from-orange-500 to-amber-500 shadow-lg shadow-orange-500/30"
+                        ? "bg-gradient-to-r from-orange-500 to-amber-500 shadow-lg shadow-orange-500/30 text-white"
                         : section.id < currentSection
-                          ? "bg-green-500 shadow-lg shadow-green-500/30"
-                          : "bg-slate-100 border-2 border-slate-200"
+                          ? "bg-green-500 shadow-lg shadow-green-500/30 text-white"
+                          : "bg-slate-100 border-2 border-slate-200 text-slate-400"
                     }`}
                   >
-                    {section.id < currentSection ? "✓" : section.icon}
+                    {section.id < currentSection ? (
+                      <span className="text-white text-lg font-bold">✓</span>
+                    ) : (
+                      <section.Icon className="w-6 h-6" />
+                    )}
                   </div>
                   <span
                     className={`hidden sm:block text-xs font-medium ${
@@ -415,10 +420,8 @@ export default function IncubatePage() {
             {/* Section Header */}
             <div className="bg-gradient-to-r from-slate-50 to-white px-6 sm:px-8 py-6 border-b border-slate-100">
               <div className="flex items-center gap-4">
-                <div className="w-14 h-14 rounded-2xl bg-gradient-to-br from-orange-500/20 to-amber-500/20 flex items-center justify-center">
-                  <span className="text-3xl">
-                    {sections[currentSection - 1].icon}
-                  </span>
+                <div className="w-14 h-14 rounded-2xl bg-gradient-to-br from-orange-500/20 to-amber-500/20 flex items-center justify-center text-orange-500">
+                  {(() => { const SectionIcon = sections[currentSection - 1].Icon; return <SectionIcon className="w-7 h-7" />; })()}
                 </div>
                 <div>
                   <h2 className="text-xl sm:text-2xl font-bold text-slate-900">
@@ -691,9 +694,9 @@ export default function IncubatePage() {
                           </div>
                         )}
                         <div
-                          className={`w-14 h-14 rounded-2xl bg-gradient-to-br ${stage.color} flex items-center justify-center mb-4`}
+                          className={`w-14 h-14 rounded-2xl bg-gradient-to-br ${stage.color} flex items-center justify-center mb-4 text-white`}
                         >
-                          <span className="text-3xl">{stage.icon}</span>
+                          <stage.Icon className="w-7 h-7" />
                         </div>
                         <h3 className="font-bold text-slate-900 text-lg mb-1">
                           {stage.label}
@@ -733,8 +736,8 @@ export default function IncubatePage() {
                           </div>
                         )}
                         <div className="flex items-center gap-4">
-                          <div className="w-14 h-14 rounded-2xl bg-gradient-to-br from-orange-500/20 to-amber-500/20 flex items-center justify-center">
-                            <span className="text-3xl">{option.icon}</span>
+                          <div className="w-14 h-14 rounded-2xl bg-gradient-to-br from-orange-500/20 to-amber-500/20 flex items-center justify-center text-orange-500">
+                            <option.Icon className="w-7 h-7" />
                           </div>
                           <div>
                             <h3 className="font-bold text-slate-900 text-lg">
@@ -821,7 +824,9 @@ export default function IncubatePage() {
                         Submitting...
                       </span>
                     ) : (
-                      <>🚀 Submit Application</>
+                      <span className="flex items-center gap-2">
+                        <Rocket className="w-5 h-5" /> Submit Application
+                      </span>
                     )}
                   </button>
                 )}

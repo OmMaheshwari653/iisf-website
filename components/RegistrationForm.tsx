@@ -48,6 +48,7 @@ export default function RegistrationForm({
   } | null>(null);
 
   const addParticipant = () => {
+    if (participants.length >= 6) return;
     setParticipants([
       ...participants,
       {
@@ -164,8 +165,8 @@ export default function RegistrationForm({
         /* Event Details Section */
         <section className="pt-24 pb-20 px-4 sm:px-6 lg:px-8">
           <div className="max-w-4xl mx-auto">
-            {/* Event Image */}
-            <div className="relative h-64 sm:h-80 md:h-96 rounded-2xl overflow-hidden mb-8 shadow-2xl">
+            {/* Event Image - 4:5 Poster Ratio */}
+            <div className="relative w-full aspect-[4/5] max-h-[600px] rounded-2xl overflow-hidden mb-8 shadow-2xl">
               {eventImage ? (
                 <img
                   src={eventImage}
@@ -455,9 +456,10 @@ export default function RegistrationForm({
                             <button
                               type="button"
                               onClick={addParticipant}
-                              className="px-4 py-2 rounded-lg border border-orange-500/50 text-orange-400 text-sm font-medium hover:bg-orange-500/10 hover:scale-105 active:scale-95 transition-all"
+                              disabled={participants.length >= 6}
+                              className="px-4 py-2 rounded-lg border border-orange-500/50 text-orange-400 text-sm font-medium hover:bg-orange-500/10 hover:scale-105 active:scale-95 transition-all disabled:opacity-40 disabled:cursor-not-allowed"
                             >
-                              + Add Member
+                              + Add Member {participants.length >= 6 ? "(Max 6)" : ""}
                             </button>
                           )}
                         </div>

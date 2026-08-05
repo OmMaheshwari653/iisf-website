@@ -2,6 +2,7 @@
 
 import Link from "next/link";
 import { useEffect, useState } from "react";
+import { Rocket } from "lucide-react";
 
 export default function NotFound() {
   const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
@@ -89,7 +90,9 @@ export default function NotFound() {
         </p>
 
         {/* Animated rocket */}
-        <div className="text-6xl mb-8 animate-bounce">🚀</div>
+        <div className="flex justify-center mb-8 animate-bounce">
+          <Rocket className="w-16 h-16 text-orange-500" />
+        </div>
 
         {/* Action buttons */}
         <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
